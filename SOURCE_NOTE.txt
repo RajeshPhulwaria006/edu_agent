@@ -1,0 +1,8 @@
+EduAgent project reconstructed from the supplied PDF.
+
+All source files that contain code in the PDF were extracted into their listed paths.
+The PDF's project structure lists backend/seed.py, but the PDF does not include its
+implementation. Therefore seed.py is intentionally a placeholder rather than
+invented code.
+
+Source: EduAgent_Complete_Project_Code_260826_184357.pdf
