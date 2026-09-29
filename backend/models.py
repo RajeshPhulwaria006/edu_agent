@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from database import Base
+
 class Student(Base):
     __tablename__ = "students"
     id = Column(Integer, primary_key=True, index=True)
@@ -11,8 +12,12 @@ class Student(Base):
     section = Column(String, default="")
     email = Column(String, default="")
     previous_cgpa = Column(Float, default=0)
-    performances = relationship("Performance", back_populates="student",
-                                cascade="all, delete")
+    performances = relationship(
+        "Performance", 
+        back_populates="student",
+        cascade="all, delete"
+    )
+
 class Performance(Base):
     __tablename__ = "performances"
     id = Column(Integer, primary_key=True, index=True)

@@ -17,14 +17,18 @@ X = np.array([
 y = np.array([1,1,1,1,1,0,0,0,0,1])
 model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X, y)
-def predict_risk(attendance, internal, assignment,
-                 practical, quiz, previous_cgpa):
+
+def predict_risk(
+    attendance, internal, assignment,
+    practical, quiz, previous_cgpa
+):
     features = np.array([[
         attendance, internal, assignment,
         practical, quiz, previous_cgpa
     ]])
     prediction = model.predict(features)[0]
     probability = model.predict_proba(features)[0]
+
     return {
         "risk": "HIGH" if prediction == 0 else "LOW",
         "high_risk_probability": round(float(probability[0]) * 100, 2)
