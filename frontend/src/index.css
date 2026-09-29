@@ -31,7 +31,7 @@ body { margin:0; font-family:Arial,sans-serif; background:#f5f7fb; }
 }
 .student-row {
   display:flex; align-items:center; justify-content:space-between;
-  gap:15px; padding:18px; border-bottom:1px solid #eee;
+  gap:20px; padding:18px; border-bottom:1px solid #eee;
 }
 .student-row p { margin:5px 0; color:#777; }
 .button,.ai-button {
