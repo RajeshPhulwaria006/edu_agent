@@ -63,6 +63,7 @@ pnpm-debug.log*
 
 frontend/dist/
 frontend/.vite/
+frontend/package-lock.json
 
 # ---------- IDEs ----------
 
