@@ -4,7 +4,7 @@ from database import get_db
 from models import Student, Performance
 from schemas import PerformanceCreate, PerformanceResponse
 from ml.predictor import predict_risk
-from ml.agents import Agent
+from backend.ml.agents_config import Agent
 
 router = APIRouter(prefix="/performance", tags=["Performance"])
 
@@ -59,7 +59,10 @@ def analyze(student_id: int, db: Session = Depends(get_db)):
         practical*.20 + quiz*.20
     )
     
-    model = Agent(name="Student performance analyser", description="You are a professional and experienced consultor in education")
+    model = Agent(
+        name="Student performance analyser",
+        description="You are a professional and experienced consultor in education"
+    )
     recommendations = model.recommend(input={
         'attendence': attendance,
         'internal_marks': internal,
