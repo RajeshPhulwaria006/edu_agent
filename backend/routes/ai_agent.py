@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from database import get_db
 from models import Student, Performance
-from backend.ml.agents_config import Agent
+from ml.agents_config import Agent
 
 router = APIRouter(prefix="/ai", tags=["AI Agent"])
 # Initialize the AI agent

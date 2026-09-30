@@ -4,7 +4,7 @@ from database import get_db
 from models import Student, Performance
 from schemas import PerformanceCreate, PerformanceResponse
 from ml.predictor import predict_risk
-from backend.ml.agents_config import Agent
+from ml.agents_config import Agent
 
 router = APIRouter(prefix="/performance", tags=["Performance"])
 
