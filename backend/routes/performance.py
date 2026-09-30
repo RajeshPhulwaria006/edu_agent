@@ -4,6 +4,7 @@ from database import get_db
 from models import Student, Performance
 from schemas import PerformanceCreate, PerformanceResponse
 from ml.predictor import predict_risk
+from ml.agents_config import Agent
 
 router = APIRouter(prefix="/performance", tags=["Performance"])
 
@@ -36,7 +37,8 @@ def analyze(student_id: int, db: Session = Depends(get_db)):
         raise HTTPException(404, "Student not found")
     
     records = db.query(Performance).filter(
-        Performance.student_id == student_id).all()
+        Performance.student_id == student_id
+    ).all()
     
     if not records:
         return {"message": "No performance data available"}
@@ -56,20 +58,18 @@ def analyze(student_id: int, db: Session = Depends(get_db)):
         attendance*.20 + internal*.25 + assignment*.15 +
         practical*.20 + quiz*.20
     )
-    recommendations = []
     
-    if attendance < 75:
-        recommendations.append("Improve class attendance.")
-    if internal < 50:
-        recommendations.append("Attend internal-test preparation sessions.")
-    if assignment < 50:
-        recommendations.append("Complete pending assignments.")
-    if practical < 50:
-        recommendations.append("Practice laboratory exercises regularly.")
-    if quiz < 50:
-        recommendations.append("Take more quizzes and revision tests.")
-    if not recommendations:
-        recommendations.append("Continue the current study strategy.")
+    model = Agent(
+        name="Student performance analyser",
+        description="You are a professional and experienced consultor in education"
+    )
+    recommendations = model.recommend(input={
+        'attendence': attendance,
+        'internal_marks': internal,
+        'practical_marks': practical,
+        'assignment_marks': assignment,
+        'quiz': quiz
+    })
     
     return {
         "student_id": student.id,
@@ -82,5 +82,5 @@ def analyze(student_id: int, db: Session = Depends(get_db)):
         "overall_score": round(overall,2),
         "risk": prediction["risk"],
         "high_risk_probability": prediction["high_risk_probability"],
-        "recommendations": recommendations
+        "recommendations": recommendations.split('\n')
     }
