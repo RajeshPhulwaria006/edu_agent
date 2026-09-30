@@ -128,9 +128,15 @@ Initialize demo data:
 python seed.py
 ```
 
+Initialize GROQ api key in backend/.env
+
+```text
+GROQ_API_KEY="your-api-key"
+```
 Start the API:
 
 ```bash
+cd backend
 uvicorn main:app --reload
 ```
 
