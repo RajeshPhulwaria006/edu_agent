@@ -55,18 +55,18 @@ class Agent:
                 {description}
 
                 Analyze the student's performance from the provided data.
-
                 Student data:
                 {input}
 
-                Write exactly short notes covering:
+                Write exactly detailed notes in report format covering:
                 1. Overall performance
                 2. Strongest areas
                 3. Weakest areas
                 4. Areas needing improvement
                 5. One actionable recommendation
+                6. Craft a roadmap in bullet points for the student to follow for further improvements
 
-                Use plain text only. No Markdown, bullets, headings, emojis, or formatting.
+                Use plain text only. No Markdown, emojis, or any other formatting.
                 Use only the given data and avoid assumptions or fabricated details.
             """
         )
