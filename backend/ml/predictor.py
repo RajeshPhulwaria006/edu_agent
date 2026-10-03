@@ -1,7 +1,7 @@
 import pickle
 import numpy as np
 
-with open('saved_models/model.pkl', 'rb') as f:
+with open('ml/saved_models/model.pkl', 'rb') as f:
     model = pickle.load(f)
     print("Model loaded from model.pkl")
 

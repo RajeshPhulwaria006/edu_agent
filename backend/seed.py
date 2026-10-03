@@ -165,18 +165,24 @@ def seed_dummy_data():
     This function can be expanded to add more diverse data as needed.
     """
     data = pd.read_csv('ml/student_data.csv')[:100]  # Limit to first 100 rows for seeding
+    # create tables if they don't exist
+    Base.metadata.create_all(bind=engine)
+    # create a new session
     db = SessionLocal()
+    # remove existing data to avoid duplicates
+    db.query(Performance).delete()
+    db.query(Student).delete()
 
     try:
         for _, row in data.iterrows():
             student = Student(
                 name=row['name'],
-                roll_no=row['roll_no'],
-                course=row['course'],
-                semester=row['semester'],
-                section=row['section'],
-                email=row['email'],
-                previous_cgpa=row['previous_cgpa'],
+                roll_no="BCA" + str(1 + _),  # Generate roll number based on index
+                course="BCA",
+                semester=5,
+                section="A",
+                email="dummy" + str(1 + _) + "@example.com",  # Generate dummy email
+                previous_cgpa=row['previous_cgpa']
             )
             db.add(student)
             db.commit()
@@ -184,12 +190,18 @@ def seed_dummy_data():
 
             performance = Performance(
                 student_id=student.id,
-                subject=row['subject'],
+                subject=np.random.choice([
+                    'C/C++', 'Java', 'Python', 'Database Management',
+                    'Computer Networks', 'Data Structures', 'Operating Systems',
+                    'Software Engineering', 'Web Development', 'Machine Learning',
+                    'Artificial Intelligence', 'Cloud Computing', 'Cyber Security', 
+                    'Mobile App Development', 'Data Science', 'Intro to Linux'
+                ]),
                 attendance=row['attendance'],
-                internal_marks=row['internal_marks'],
-                assignment_marks=row['assignment_marks'],
-                practical_marks=row['practical_marks'],
-                quiz_marks=row['quiz_marks'],
+                internal_marks=row['internal'],
+                assignment_marks=row['assignment'],
+                practical_marks=row['practical'],
+                quiz_marks=row['quiz'],
             )
             db.add(performance)
             db.commit()
