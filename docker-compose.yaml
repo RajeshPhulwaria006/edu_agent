@@ -1,0 +1,26 @@
+services:
+
+  backend:
+    build:
+      context: ./backend
+    container_name: eduagent-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - eduagent-db:/app
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: eduagent-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  eduagent-db:
