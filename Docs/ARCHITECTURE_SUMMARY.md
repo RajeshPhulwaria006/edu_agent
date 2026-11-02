@@ -40,6 +40,7 @@ FastAPI Backend
                               ▼
                     Analysis / Recommendation
 ```
+[![Architecture diagram of rajeshphulwaria006/edu_agent](https://gitdiagram.com/rajeshphulwaria006/edu_agent/diagram.png)](https://gitdiagram.com/rajeshphulwaria006/edu_agent?utm_source=readme&utm_medium=picture)
 
 The important architectural idea is that **the LLM is not the source of
 the student's raw academic truth**.
