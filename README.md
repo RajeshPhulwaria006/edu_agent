@@ -174,4 +174,4 @@ For a real institutional deployment, the model should be trained and validated u
 
 ## 📄 License
 
-This project is intended for educational and development purposes.
+Copyright @ 2026 EDU-AGENT
